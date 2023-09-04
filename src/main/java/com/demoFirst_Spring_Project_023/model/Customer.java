@@ -8,13 +8,16 @@ public class Customer {
     private int customerId;
     @JsonProperty("name")
     private String customerName;
-    @JsonProperty("phone")
-    private String customerPhone;
+    @JsonProperty("email")
+    private String customerEmail;
+    @JsonProperty("type")
+    private CustomerType customerType;
 
-    public Customer(int id, String name, String phone) {
-        this.customerId = id;
-        this.customerName = name;
-        this.customerPhone = phone;
+    public Customer(int customerId, String customerName, String customerEmail, CustomerType customerType) {
+        this.customerId = customerId;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.customerType = customerType;
     }
 
     public int getCustomerId() {
@@ -33,16 +36,24 @@ public class Customer {
         this.customerName = customerName;
     }
 
-    public String getCustomerPhone() {
-        return customerPhone;
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public CustomerType getCustomerType() {
+        return customerType;
+    }
+
+    public void setCustomerType(CustomerType customerType) {
+        this.customerType = customerType;
     }
 
     @Override
     public String toString() {
-        return String.format("%s is customer with id %s and phone number %s",this.customerName,this.customerId,this.customerPhone);
+        return String.format("%s is customer with id %s and phone number %s",this.customerName,this.customerId,this.customerEmail);
     }
 }
