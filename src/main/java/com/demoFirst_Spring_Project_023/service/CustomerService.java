@@ -1,11 +1,10 @@
-package com.demoFirst_Spring_Project_023.repository;
+package com.demoFirst_Spring_Project_023.service;
 
 import com.demoFirst_Spring_Project_023.model.Customer;
-import com.demoFirst_Spring_Project_023.model.CustomerType;
 
 import java.util.List;
 
-public interface CustomerRepository {
+public interface CustomerService {
 
     Integer createCustomer(Customer customer);
     String updateCustomerName(int id, String name);
@@ -16,7 +15,4 @@ public interface CustomerRepository {
     //getCustomerByName
     List<Customer> getAllCustomers();
     List<String> getAllCustomerNames();
-
-    List<Customer> getAllCustomersByType(CustomerType type);
-
 }

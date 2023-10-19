@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Customer {
 
     @JsonProperty("id")
-    private int customerId;
+    private Integer customerId;
     @JsonProperty("name")
     private String customerName;
     @JsonProperty("email")
@@ -20,7 +20,7 @@ public class Customer {
         this.customerType = customerType;
     }
 
-    public int getCustomerId() {
+    public Integer getCustomerId() {
         return customerId;
     }
 

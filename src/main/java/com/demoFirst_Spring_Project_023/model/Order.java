@@ -1,17 +1,20 @@
 package com.demoFirst_Spring_Project_023.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Order {
 
     private int id;
+    @JsonProperty("item_name")
     private String itemName;
-    private String customerName;
+    @JsonProperty("customer_id")
+    private int customerId;
     private double price;
 
-
-    public Order(int id, String itemName, String customerName, double price) {
+    public Order(int id, String itemName, int customerId, double price) {
         this.id = id;
         this.itemName = itemName;
-        this.customerName = customerName;
+        this.customerId = customerId;
         this.price = price;
     }
 
@@ -31,12 +34,12 @@ public class Order {
         this.itemName = itemName;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public double getPrice() {
