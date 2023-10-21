@@ -2,7 +2,6 @@ package com.demoFirst_Spring_Project_023.controller;
 
 
 import com.demoFirst_Spring_Project_023.model.Customer;
-import com.demoFirst_Spring_Project_023.repository.CustomerRepository;
 import com.demoFirst_Spring_Project_023.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -13,3 +13,13 @@ spring:
     console:
       enabled: true
 
+
+tvmaze:
+  url: "https://api.tvmaze.com/"
+
+lastfm:
+  url: "https://ws.audioscrobbler.com/2.0/"
+
+second_micro_service:
+  url: "http://localhost:8091"
+

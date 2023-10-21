@@ -1,8 +1,16 @@
+package com.First_Spring_Project_023.service;
+
+import com.demoFirst_Spring_Project_023.model.Customer;
+import com.demoFirst_Spring_Project_023.model.CustomerType;
 import com.demoFirst_Spring_Project_023.repository.CustomerRepositoryImpl;
 import com.demoFirst_Spring_Project_023.service.CustomerService;
+import com.demoFirst_Spring_Project_023.utils.Constants;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
