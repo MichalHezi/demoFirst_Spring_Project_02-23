@@ -2,8 +2,11 @@ package com.demoFirst_Spring_Project_023.repository;
 
 import com.demoFirst_Spring_Project_023.model.Customer;
 import com.demoFirst_Spring_Project_023.model.CustomerType;
+import com.demoFirst_Spring_Project_023.repository.cache.CacheRepository;
 import com.demoFirst_Spring_Project_023.repository.mapper.CustomerMapper;
 import com.demoFirst_Spring_Project_023.utils.Constants;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,6 +19,12 @@ public class CustomerRepositoryImpl implements CustomerRepository{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    CacheRepository cacheRepository;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Override
     public Integer createCustomer(Customer customer) {
@@ -56,13 +65,21 @@ public class CustomerRepositoryImpl implements CustomerRepository{
     }
 
     @Override
-    public Customer getCustomerById(Integer id) {
-        String sql = "SELECT * FROM " + Constants.CUSTOMER_TABLE_NAME + " WHERE id = ?";
-        try{
-            return jdbcTemplate.queryForObject(sql,new CustomerMapper(),id);
-        }catch (EmptyResultDataAccessException e){
-            return null;
+    public Customer getCustomerById(Integer id) throws JsonProcessingException {
+        String cacheKey = createKeyForCustomer(id);
+        if (cacheRepository.isCacheEntityExists(cacheKey)){
+            String customerAsString = cacheRepository.getCacheEntity(cacheKey);
+            return objectMapper.readValue(customerAsString, Customer.class);
+        }else{
+            String sql = "SELECT * FROM " + Constants.CUSTOMER_TABLE_NAME + " WHERE id = ?";
+            try{
+                return jdbcTemplate.queryForObject(sql,new CustomerMapper(),id);
+            }catch (EmptyResultDataAccessException e){
+                return null;
+            }
+
         }
+
     }
 
     @Override
@@ -91,4 +108,6 @@ public class CustomerRepositoryImpl implements CustomerRepository{
         sql = "SELECT * FROM " + Constants.CUSTOMER_TABLE_NAME + " WHERE status = ?";
         return jdbcTemplate.query(sql,new CustomerMapper(),type.name());
     }
+
+    private String createKeyForCustomer(Integer customer)
 }
